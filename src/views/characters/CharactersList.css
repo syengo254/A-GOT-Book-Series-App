@@ -1,0 +1,53 @@
+.filters-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.filter {
+    margin: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.input-field {
+    padding: .4rem .8rem;
+    font-size: .9rem;
+    font-family: 'Poppins', sans-serif;
+    margin: 0 1rem;
+}
+
+label {
+    font-size: .9rem;
+    display: inline-block;
+    width: fit-content;
+}
+
+/* input[type="text"].input-field {
+    min-width: 250px;
+} */
+
+table.char-table {
+    position: relative;
+    border: 1px solid var(--bg-color);
+    border-collapse: collapse;
+    width: 100%;
+    color: rgba(0, 0, 0, .75);
+}
+
+table.char-table > thead > tr {
+    border-bottom: 1px solid var(--bg-color);
+    background: rgba(238, 100, 25, .25);
+}
+
+table.char-table > thead > tr > th,
+table.char-table > tbody > tr > td {
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem;
+    border-right: 1px solid var(--bg-color);
+    padding: .2rem 0;
+}
