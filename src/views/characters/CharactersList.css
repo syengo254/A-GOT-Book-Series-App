@@ -45,9 +45,10 @@ table.char-table > thead > tr {
 
 table.char-table > thead > tr > th,
 table.char-table > tbody > tr > td {
+    border-bottom: 1px solid var(--bg-color);
     text-align: center;
     font-weight: 500;
     font-size: 1rem;
     border-right: 1px solid var(--bg-color);
-    padding: .2rem 0;
+    padding: .2rem .2rem;
 }

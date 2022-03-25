@@ -20,6 +20,11 @@
     color: var(--bg-color);
     font-weight: 500;
   }
+
+  nav.pagination-links > a.active {
+    color: white;
+    background: var(--bg-color);
+  }
   
   nav.pagination-links > a:hover {
     text-decoration: underline;

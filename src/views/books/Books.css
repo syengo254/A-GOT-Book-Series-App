@@ -54,9 +54,9 @@
     padding: 0 .5rem;
 }
 
-.authors-date {
-    text-align: center;
-}
+/* .authors-date {
+    text-align: justif;
+} */
 
 .authors-date > span {
     color: black;

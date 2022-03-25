@@ -1,26 +1,32 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import bookIcon from '../../assets/img/book_icon.png';
 
-const BookItem = () => {
+const BookItem = ({book}) => {
+    const { id, name, released, authors, comments_count } = book;
+    const bookUrl = `/books/${id}`;
+
+    let navigate = useNavigate();
+
     return ( 
         <div className="book-item">
-            <div className="book-title">
-                A Game of Thrones
+            <div className="book-title" onClick={ () => navigate(bookUrl) }>
+                { name }
             </div>
             <div className="book-icon">
                 <img src={ bookIcon } alt="book-icon" />
             </div>
             <div className="book-meta">
                 <div className="authors-date">
-                    <span>Authors: George RR. Martin, Weidorf Fckup, John Doe</span>
-                    <span>Released on: 1996-08-01</span>
+                    <span>Authors: { authors.join(', ') }</span>
+                    <span>Released on: { released }</span>
                 </div>
                 <div className="comments-link">
-                    <a href="#">Characters</a>
+                    <Link to={`${bookUrl}/characters`}>Show characters</Link>
                 </div>
             </div>
             <div className="view-link">
-                <a href="#">Comments: 1</a>
+                <Link to={`${bookUrl}`}>View comments: { comments_count }</Link>
             </div>
         </div>
      );

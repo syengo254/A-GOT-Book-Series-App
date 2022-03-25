@@ -1,0 +1,31 @@
+.character-info {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.form-group {
+    display: flex;
+    margin: 1rem 0;
+    align-items: center;
+}
+
+.character-info img {
+    position: relative;
+    width: 120px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-group > label {
+    width: 100px;
+}
+
+.form-group > input {
+    font-family: 'Poppins', sans-serif;
+    padding: .5rem .8rem;
+    font-size: 1rem;
+    outline: none;
+    border: 1px solid var(--bg-color);
+    background: #eee;
+    min-width: 200px;
+}
