@@ -62,18 +62,24 @@ const CharactersList = () => {
 
         setLoading(true);
 
-        const action = await axios.get(`${ url }/characters${ urlParams }`);
-        const { success, data, message, pages } = action.data;
+        try {
+            const action = await axios.get(`${ url }/characters${ urlParams }`);
+            const { success, data, message, pages } = action.data;
 
-        setLoading(false);
+            setLoading(false);
 
-        if(success === 1){
-            setCharacters(data);
-            setTotalPages(pages.total_pages);
-        }
-        else{
+            if(success === 1){
+                setCharacters(data);
+                setTotalPages(pages.total_pages);
+            }
+            else{
+                setError(true);
+                setMsg(message);
+            }
+        } catch (error) {
+            setLoading(false);
             setError(true);
-            setMsg(message);
+            setMsg(error.message);
         }
     }
 

@@ -28,18 +28,24 @@ const Books = () => {
 
         setLoading(true);
 
-        const action = await axios.get(`${url}/books${ urlParams }`);
-        const { success, data, message, pages } = action.data;
+        try {
+            const action = await axios.get(`${url}/books${ urlParams }`);
+            const { success, data, message, pages } = action.data;
 
-        setLoading(false);
+            setLoading(false);
 
-        if(success === 1){
-            setBooks(data);
-            setPagination( pages );
-        }
-        else{
+            if(success === 1){
+                setBooks(data);
+                setPagination( pages );
+            }
+            else{
+                setError(true);
+                setMsg(message);
+            }
+        } catch (error) {
+            setLoading(false);
             setError(true);
-            setMsg(message);
+            setMsg(error.message);
         }
     }
 

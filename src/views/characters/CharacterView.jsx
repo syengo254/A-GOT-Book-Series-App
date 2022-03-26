@@ -23,18 +23,24 @@ const CharacterView = () => {
 
         setLoading(true);
 
-        const action = await axios.get(`${ url }/characters/${id}`);
-        const { success, data, message, metadata } = action.data;
+        try {
+            const action = await axios.get(`${ url }/characters/${id}`);
+            const { success, data, message, metadata } = action.data;
 
-        setLoading(false);
+            setLoading(false);
 
-        if(success === 1){
-            data.age = metadata.total_age.in_years;
-            setCharacter(data);
-        }
-        else{
+            if(success === 1){
+                data.age = metadata.total_age.in_years;
+                setCharacter(data);
+            }
+            else{
+                setError(true);
+                setMsg(message);
+            }
+        } catch (error) {
+            setLoading(false);
             setError(true);
-            setMsg(message);
+            setMsg(error.message);
         }
     }
 
