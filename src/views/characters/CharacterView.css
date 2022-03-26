@@ -29,3 +29,9 @@
     background: #eee;
     min-width: 200px;
 }
+
+@media screen and (max-width: 550px) {
+    .form-group > label {
+        width: 75px;
+    }
+}
