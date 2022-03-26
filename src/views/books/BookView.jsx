@@ -86,7 +86,7 @@ const BookView = () => {
 
     return ( 
         <MainLayout>
-            <main className="section" style={{width: '400px'}}>
+            <main className="section">
                 <div className="app-title">
                     <h1>A GOT Book Series App</h1>
                 </div>

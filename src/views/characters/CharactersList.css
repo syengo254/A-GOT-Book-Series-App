@@ -52,3 +52,42 @@ table.char-table > tbody > tr > td {
     border-right: 1px solid var(--bg-color);
     padding: .2rem .2rem;
 }
+
+
+@media screen and (max-width:600px) {
+    .filters-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 1rem;
+        margin: 0;
+    }
+
+    .input-field {
+        padding: .5rem 0;
+        text-indent: 1rem;
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+        margin: .5rem;
+        outline: none;
+    }
+
+    label {
+        margin: .5rem 0;
+    }
+
+    button.input-field {
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .hide-sm {
+        display: none;
+    }
+}

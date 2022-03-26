@@ -10,11 +10,11 @@ const CharactersTable = ({ characters }) => {
         <table className="char-table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th className='hide-sm'>#</th>
                     <th>Character Name</th>
-                    <th>Aliases</th>
+                    <th className='hide-sm'>Aliases</th>
                     <th>Gender</th>
-                    <th>Lifetime</th>
+                    <th className='hide-sm'>Lifetime</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,11 +22,11 @@ const CharactersTable = ({ characters }) => {
                     characters.map( ({ id, name, gender, aliases, born, died }, i) => {
                         return (
                             <tr key={`character-${id}`}>
-                                <td>{ i + 1 }.</td>
+                                <td className='hide-sm'>{ i + 1 }.</td>
                                 <td><Link to={`/characters/${id}`}>{ name === "" ? "blank" : name  }</Link></td>
-                                <td style={{wordWrap:'break-word', maxWidth:'250px'}}>{ aliases.join(', ') }</td>
+                                <td className='hide-sm' style={{wordWrap:'break-word', maxWidth:'250px'}}>{ aliases.join(', ') }</td>
                                 <td>{ gender }</td>
-                                <td style={{wordWrap:'break-word', maxWidth:'100px'}}>{ born === "" ? "unknown" : born } to { died === "" ? "unknown" : died }</td>
+                                <td className='hide-sm' style={{wordWrap:'break-word', maxWidth:'100px'}}>{ born === "" ? "unknown" : born } to { died === "" ? "unknown" : died }</td>
                             </tr>
                         );
                     })

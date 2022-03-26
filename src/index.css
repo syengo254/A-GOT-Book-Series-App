@@ -39,3 +39,10 @@ main {
     padding: .5rem 1rem;
   }  
 }
+
+@media screen and (max-width: 800px) {
+  .section {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

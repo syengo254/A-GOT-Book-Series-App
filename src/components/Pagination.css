@@ -33,3 +33,26 @@
   nav.pagination-links > a:last-child {
     border-right: none;
   }
+
+  @media screen and (max-width:550px) {
+    .pagination {
+      width: 100%;
+      margin: 1.5rem auto;
+    }
+
+    .pagination-links {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    nav.pagination-links > a {
+      font-size: 1.2rem;
+      border: 1px solid var(--bg-color);
+      padding: .8rem 1rem;
+      margin-bottom: .2rem;
+    }
+
+    nav.pagination-links > a:last-child {
+      border-right: 1px solid var(--bg-color);
+    }
+  }

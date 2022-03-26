@@ -60,3 +60,30 @@ input[type="submit"] {
     cursor: pointer;
     font-weight: 500;
 }
+
+@media screen and (max-width: 550px) {
+    .book {
+        width:100%;
+        padding: 1rem;
+    }
+
+    .comment-form > form {
+        width: 100%;
+    }
+
+    .b-icon {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .b-icon > img {
+        width: 120px;
+        object-fit: cover;
+        margin: 1rem;
+    }
+
+    .b-meta {
+        text-align: center;
+    }
+}
