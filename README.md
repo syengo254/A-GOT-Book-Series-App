@@ -1,7 +1,7 @@
 # A GOT Book Series App
 
 ### Description
-This is an react app meant to consume the Extended API of Ice and Fire.
+This is an react app meant to consume the Extended API of Ice and Fire created on the repo https://github.com/syengo254/An-Extended-API-of-Ice-Fire.
 
 Requirements
 ------------
@@ -18,5 +18,6 @@ npm install
 ```cmd
 npm start
 ```
+3. Finally open the URL on your browser, normally it will be http://localhost:3000/
 
-Consumed API is found at anapioficeandfire.com
+The Consumed API can be found at anapioficeandfire.com
