@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './CharactersList.css';
 import Pagination from '../../components/Pagination';
 import MainLayout from '../layouts/MainLayout';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const CharacterRow = ({pos, character}) => {
     return ( 
         <tr>
             <td>{ pos }.</td>
-            <td><a href={character}>{character}</a></td>
+            <td><Link to={character}>{character}</Link></td>
         </tr>
      );
 }
@@ -46,6 +46,12 @@ const BookCharacters = () => {
         getCharacters();
     }, []);
 
+    function stripDomainOnURL(str){
+        str = str.replace(process.env.REACT_APP_API_URL, "");
+
+        return str;
+    }
+
     return ( 
         <MainLayout>
             <main className="section">
@@ -53,6 +59,7 @@ const BookCharacters = () => {
                     <h1>A GOT Book Series App</h1>
                 </div>
                 <span>Characters for the Book: { book && book.name }</span>
+                <p>Click on the link to view character details</p>
                 <div className="characters-list">
                     <table className="char-table">
                         <thead>
@@ -62,10 +69,10 @@ const BookCharacters = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            { loading && <tr><td>Loading...</td></tr>}
-                            { error && <tr><td>msg</td></tr> }
+                            { loading && <tr><td colSpan="2">{`Loading...`}</td></tr>}
+                            { error && <tr><td colSpan="2">{msg}</td></tr> }
                             {
-                                characters.length && characters.map( (character, i) => <CharacterRow key={i} pos={i + 1} character={character} />)
+                                characters.length && characters.map( (character, i) => <CharacterRow key={i} pos={i + 1} character={stripDomainOnURL(character)} />)
                             }
                         </tbody>
                     </table>

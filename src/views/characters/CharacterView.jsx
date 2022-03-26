@@ -7,7 +7,13 @@ import axios from 'axios';
 
 const CharacterView = () => {
     const { id } = useParams();
-    const [ character, setCharacter ] = useState({});
+    const [ character, setCharacter ] = useState({
+        name: "",
+        gender: "",
+        age: "",
+        aliases: "",
+        titles: "",
+    });
     const [ error, setError ] = useState(false);
     const [ loading, setLoading ] = useState(false);
     const [ msg, setMsg ] = useState('');
@@ -45,7 +51,8 @@ const CharacterView = () => {
                 { loading && 'Loading...'}
                 { error && msg }
                 <div className="character-info" style={{ width: '400px', margin: '0 auto'}}>
-                    <form>
+                    {
+                        <form>
                         <div>
                             <img src={userIcon} width="120" height="120" alt="user-icon" />
                         </div>
@@ -55,21 +62,22 @@ const CharacterView = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="gender">Gender:</label>
-                            <input type="text" id="gender" value={character.gender} readOnly/>
+                            <input type="text" id="gender" value={character.gender ?? ""} readOnly/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="age">Age:</label>
-                            <input type="text" id="age" value={character.age} readOnly/>
+                            <input type="text" id="age" value={character.age ?? ""} readOnly/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="titles">Titles:</label>
-                            <input type="text" id="titles" value={character.titles} readOnly/>
+                            <input type="text" id="titles" value={character.titles ?? ""} readOnly/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="aliases">Aliases:</label>
-                            <input type="text" id="aliases" value={character.aliases} readOnly/>
+                            <input type="text" id="aliases" value={character.aliases ?? ""} readOnly/>
                         </div>
                     </form>
+                    }
                 </div>
             </main>
         </MainLayout>
