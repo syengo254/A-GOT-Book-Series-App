@@ -90,6 +90,10 @@ const CharactersList = () => {
 
     function handleSearchChange(e){
         setSearch(e.target.value);
+
+        if(e.target.value === "" && params.name !== e.target.value){
+            setParams( old => ({...old, name: e.target.value, page: 1 }));
+        }
     }
 
     function onSearch(e){
