@@ -24,7 +24,7 @@ npm start
 The original consumed API can be found at anapioficeandfire.com
 
 ## View Application on Production
-The app running on production can be viewed at: appui-dsyengo.herokuapp.com
+The app running on production can be viewed at: https://appui-dsyengo.herokuapp.com
 
 ### Screenshot
 ![home screen](https://github.com/syengo254/A-GOT-Book-Series-App/blob/master/src/assets/img/screenshot.PNG?raw=true)
