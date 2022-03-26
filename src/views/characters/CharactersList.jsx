@@ -92,7 +92,9 @@ const CharactersList = () => {
         setSearch(e.target.value);
     }
 
-    function onSearch(){
+    function onSearch(e){
+        e.preventDefault();
+        
         if(search.length > 2){
             setParams( old => ({...old, name: search, page: 1 }));
         }
@@ -124,9 +126,11 @@ const CharactersList = () => {
                             </select>
                         </div>
                         <div className="filter">
-                            <label htmlFor="filter_by">Search name:</label>
-                            <input type="text" id="sname" className="input-field" placeholder="type name" onChange={ handleSearchChange } />
-                            <button type="button" className="input-field" onClick={ onSearch }>Search</button>
+                            <form onSubmit={ onSearch } id="search-form">
+                                <label htmlFor="filter_by">Search name:</label>
+                                <input type="text" id="sname" className="input-field" placeholder="type name" onChange={ handleSearchChange } required />
+                                <button type="submit" className="input-field">Search</button>
+                            </form>
                         </div>
                     </div>
                     { loading ? 'Loading...' : (error ? msg : <CharactersTable characters={ characters } />) }

@@ -20,6 +20,11 @@
     margin: 0 1rem;
 }
 
+#search-form {
+    display: flex;
+    width: 100%;
+}
+
 label {
     font-size: .9rem;
     display: inline-block;
@@ -73,8 +78,13 @@ table.char-table > tbody > tr > td {
         font-size: 1rem;
         font-family: 'Poppins', sans-serif;
         width: 100%;
-        margin: .5rem;
+        margin: .5rem 0;
         outline: none;
+    }
+
+    #search-form {
+        display: flex;
+        flex-direction: column;
     }
 
     label {
