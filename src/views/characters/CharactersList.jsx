@@ -129,8 +129,7 @@ const CharactersList = () => {
                             <button type="button" className="input-field" onClick={ onSearch }>Search</button>
                         </div>
                     </div>
-                    { loading ? 'Loading...' : <CharactersTable characters={ characters } /> }
-                    { error && msg }
+                    { loading ? 'Loading...' : (error ? msg : <CharactersTable characters={ characters } />) }
                     <Pagination onPageChange={ onPageChange } total_pages={ totalPages } />
                 </div>
             </main>
