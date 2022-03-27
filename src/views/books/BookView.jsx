@@ -91,7 +91,7 @@ const BookView = () => {
                             <label>Add your comment:</label>
                             <textarea id="comment" cols="20" rows="4" onChange={ handleCommentChange } value={commentText} maxLength='500' required />
                             <small>Min 10 &amp; max. characters is 500</small>
-                            { commentError.length && <div style={{color:'red'}}>{ commentError }</div> }
+                            { commentError.length ?? <div style={{color:'red'}}>{ commentError }</div> }
                             <input type="submit" value="Post" />
                         </form>
                     </div>
