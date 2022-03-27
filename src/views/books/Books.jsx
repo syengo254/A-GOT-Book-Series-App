@@ -1,61 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Books.css';
 import Pagination from '../../components/Pagination';
 import BookItem from './BookItem';
-import axios from 'axios';
+import useBooks from '../../hooks/useBooks';
 
 const Books = () => {
-    const [ books, setBooks ] = useState([]);
-    const [ error, setError ] = useState(false);
-    const [ loading, setLoading ] = useState(false);
-    const [ msg, setMsg ] = useState('');
     const [ params, setParams ] = useState({
         page: 1,
         pageSize: 10,
     });
 
-    const [ pagination, setPagination ] = useState({});
+    const url = process.env.REACT_APP_API_URL + '/books';
 
-    async function getBooks() {
-        const url = process.env.REACT_APP_API_URL;
-        let urlParams = '?';
-
-        for(const k in params){
-            urlParams += `${k}=${params[k]}&`;
-        }
-        
-        urlParams = urlParams.substring(0, urlParams.length - 1);
-
-        setLoading(true);
-
-        try {
-            const action = await axios.get(`${url}/books${ urlParams }`);
-            const { success, data, message, pages } = action.data;
-
-            setLoading(false);
-
-            if(success === 1){
-                setBooks(data);
-                setPagination( pages );
-            }
-            else{
-                setError(true);
-                setMsg(message);
-            }
-        } catch (error) {
-            setLoading(false);
-            setError(true);
-            setMsg(error.message);
-        }
-    }
-
+    const { data: books, loading, error, msg, pagination } = useBooks( url, params );
+    
     function onPageChange(newPage){
         setParams(old => ( {...old, page: newPage } ));
     }
-
-    useEffect(() => {
-        getBooks();
-    }, [params]);
 
     return ( 
         <main className="section">

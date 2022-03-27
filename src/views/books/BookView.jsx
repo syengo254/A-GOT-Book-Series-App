@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './BookView.css';
 import { Link, useParams } from 'react-router-dom';
 import bookIcon from '../../assets/img/book_icon.png';
 import MainLayout from '../layouts/MainLayout';
 import axios from 'axios';
+import useBooks from '../../hooks/useBooks';
 
 const Book = ({ book }) => {
     return ( 
@@ -28,29 +29,10 @@ const Book = ({ book }) => {
 
 const BookView = () => {
     const { id }= useParams();
-    const [ book, setBook ] = useState([]);
-    const [ error, setError ] = useState(false);
-    const [ loading, setLoading ] = useState(false);
-    const [ msg, setMsg ] = useState('');
     const [ commentText, setCommentText ] = useState('');
-
-    async function getBook() {
-        const url = process.env.REACT_APP_API_URL;
-
-        setLoading(true);
-        const action = await axios.get(`${url}/books/${id}`);
-        setLoading(false);
-
-        const { success, data, message } = action.data;
-
-        if(success === 1){
-            setBook(data);
-        }
-        else{
-            setError(true);
-            setMsg(message);
-        }
-    }
+    const url = process.env.REACT_APP_API_URL + '/books/' + id;
+    const { data: book, loading, error, msg, setData } = useBooks(url);
+    const [ commentError, setCommentError ] = useState('');
 
     function handleCommentChange(e){
         setCommentText(e.target.value);
@@ -62,27 +44,33 @@ const BookView = () => {
         const url = process.env.REACT_APP_API_URL;
         const formData = { isbn: book.isbn, comment: commentText };
 
-        const action = await axios.post(`${url}/comments`, formData, { headers: {
-            'Accepts': 'Application/json',
-        }});
-
-        const { success, data, message } = action.data;
-
-        if(success){
-            alert(`${message}`);
-            setCommentText('');
-            let comments = book.comments;
-            comments.unshift({...data, username: 'Me'});
-            setBook( old => ( {...old, comments, comments_count: old.comments_count + 1 } ));
-        }
-        else{
-            alert(message);
+        try {
+            const action = await axios.post(`${url}/comments`, formData, { headers: {
+                'Accepts': 'Application/json',
+            }});
+    
+            const { success, data, message } = action.data;
+    
+            if(success){
+                alert(`${message}`);
+                setCommentText('');
+                const comments = book.comments;
+                comments.unshift({...data, username: 'Me'});
+                setData( old => ({...old, comments, comments_count: comments.length}));
+            }
+            else{
+                alert(message);
+            }
+        } catch (error) {
+            if(error.response.status === 422){
+                const response = error.response.data.comment.join(', ');
+                setCommentError(response);
+            }
+            else{
+                alert( error.message );
+            }
         }
     }
-
-    useEffect(() => {
-        getBook();
-    }, []);
 
     return ( 
         <MainLayout>
@@ -102,17 +90,18 @@ const BookView = () => {
                         <form onSubmit={ submitComment }>
                             <label>Add your comment:</label>
                             <textarea id="comment" cols="20" rows="4" onChange={ handleCommentChange } value={commentText} maxLength='500' required />
-                            <small>Max. characters 500</small>
+                            <small>Min 10 &amp; max. characters is 500</small>
+                            { commentError.length && <div style={{color:'red'}}>{ commentError }</div> }
                             <input type="submit" value="Post" />
                         </form>
                     </div>
                     <h4 style={{marginBottom: '1rem'}}>Comments</h4>
                     <div>{ book.comments_count } Comments</div>
                     {
-                        book.comments_count > 0 && book.comments.map( comment => {
+                        book.comments_count && book.comments.map( comment => {
                             return (
                                 <div key={ `comment-${comment.id}` } className="comment-item">
-                                    <div className="comment-user"><span>{comment.username}</span> at <span>{ comment.created_at }</span> says:</div>
+                                    <div className="comment-user"><span>{comment.username}</span> on <span>{ comment.created_at }</span> said:</div>
                                     <p>{ comment.comment }</p>
                                 </div>
                             );
